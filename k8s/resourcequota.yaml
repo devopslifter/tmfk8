@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: tomdemo-resourcequota
+spec:
+  hard:
+    pods: "100"

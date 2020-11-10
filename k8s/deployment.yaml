@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tomdemo
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tomdemo
+  template:
+    metadata:
+      labels:
+        app: tomdemo
+    spec:
+      containers:
+        - name: tomdemo
+          image: devopslifter/tomdemo:version1.0
+          ports:
+          - containerPort: 8888
+          resources:
+            requests:
+              memory: "10Mi"
+              cpu: "100m"
+            limits:
+              memory: "20Mi"
+              cpu: "250m"
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8888
+            initialDelaySeconds: 3
+            periodSeconds: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8888
+            initialDelaySeconds: 3
+            periodSeconds: 3
